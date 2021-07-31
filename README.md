@@ -1,7 +1,18 @@
 # images_upload_tool
 github 图床上传工具  【喜欢的欢迎 点击 star  】
 
+##  typora 代码配置
 
+![image](https://user-images.githubusercontent.com/46613910/127744213-a712db07-42d1-4723-a74f-a61515461b66.png)
+
+
+![image](https://user-images.githubusercontent.com/46613910/127744226-ec110750-cac7-4b6e-8003-5e0a416c0968.png)
+
+打包后 的 exe ,的文件路径 复制到typora 设置 那里就可以了
+
+
+
+##  食用方法
 你需要下载 go的运行环境
 
 
