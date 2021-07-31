@@ -10,6 +10,9 @@ github 图床上传工具  【喜欢的欢迎 点击 star  】
 
 打包后 的 exe ,的文件路径 复制到typora 设置 那里就可以了
 
+上传图片后的效果：
+https://cdn.jsdelivr.net/gh/lyr-2000/images_repo_2021_ASUS/2021_07_31_22__59_01a0.png
+![](https://cdn.jsdelivr.net/gh/lyr-2000/images_repo_2021_ASUS/2021_07_31_22__59_01a0.png)
 
 
 ##  食用方法
