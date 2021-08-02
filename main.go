@@ -63,6 +63,7 @@ func main() {
 	for _, v := range picURLs {
 		fmt.Println(v)
 	}
+	//等上传完再退出
 	wg.Wait()
 }
 
