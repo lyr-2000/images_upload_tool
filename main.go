@@ -24,7 +24,6 @@ var picPath = "F:\\STATIC_FILE_XXOO_LIN_YANGRUI_USER_CUSTOM_SYS_FILES_WARNING\\r
 
 var timePrefix = fPrefix()
 
-
 func main() {
 	flag.Parse()
 	// \Users\Lenovo\Desktop\piccoding\main.exe "C:\\Users\\Lenovo\\AppData\\Local\\Temp/typora-icon2.png" "C:\\Users\\Lenovo\\AppData\\Local\\Temp/typora-icon.png"
@@ -41,6 +40,9 @@ func main() {
 	picURLs := make([]string, len(file))
 
 	for _, v := range file {
+		if v == "" {
+			continue
+		}
 		if !isFileExist(v) {
 			if cpFile(v) {
 				wg.Add(1)
@@ -51,7 +53,7 @@ func main() {
 					upload(v)
 					wg.Done()
 				}()
-				
+
 			}
 		} else {
 			picURLs = append(picURLs, prePicURL+timePrefix+filepath.Base(v))
@@ -61,6 +63,9 @@ func main() {
 	fmt.Println("Upload Success:")
 	//打印数组
 	for _, v := range picURLs {
+		if v == "" {
+			continue
+		}
 		fmt.Println(v)
 	}
 	//等上传完再退出
