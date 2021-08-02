@@ -8,9 +8,9 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"sync"
 	"time"
 )
-
 
 func fPrefix() string {
 	return time.Now().Format("2006_01_02_15__04_05")
@@ -19,16 +19,21 @@ func fPrefix() string {
 // 图片URL的前缀
 var prePicURL = "https://cdn.jsdelivr.net/gh/lyr-2000/images_repo_2021_ASUS/"
 
-
 // git 本地仓库路径
 var picPath = "F:\\STATIC_FILE_XXOO_LIN_YANGRUI_USER_CUSTOM_SYS_FILES_WARNING\\region0\\staticFS\\IMAGES\\2021_7_31\\"
 
 var timePrefix = fPrefix()
+
+
 func main() {
 	flag.Parse()
 	// \Users\Lenovo\Desktop\piccoding\main.exe "C:\\Users\\Lenovo\\AppData\\Local\\Temp/typora-icon2.png" "C:\\Users\\Lenovo\\AppData\\Local\\Temp/typora-icon.png"
 
 	file := flag.Args()
+	//用于协程异步上传
+	var (
+		wg sync.WaitGroup
+	)
 
 	if len(file) == 0 {
 		os.Exit(1)
@@ -38,9 +43,15 @@ func main() {
 	for _, v := range file {
 		if !isFileExist(v) {
 			if cpFile(v) {
-				upload(v)
+				wg.Add(1)
+				//使用协程异步上传，提交响应速度
 				// filepath.Base(v) 获取文件名
 				picURLs = append(picURLs, prePicURL+timePrefix+filepath.Base(v))
+				go func() {
+					upload(v)
+					wg.Done()
+				}()
+				
 			}
 		} else {
 			picURLs = append(picURLs, prePicURL+timePrefix+filepath.Base(v))
@@ -52,7 +63,7 @@ func main() {
 	for _, v := range picURLs {
 		fmt.Println(v)
 	}
-
+	wg.Wait()
 }
 
 func isFileExist(fileName string) bool {
