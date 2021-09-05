@@ -8,6 +8,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"strings"
 	"sync"
 	"time"
 )
@@ -43,6 +44,11 @@ func main() {
 		if v == "" {
 			continue
 		}
+		if strings.Contains(v,"https://")||strings.Contains(v,"http://") {
+			//网络上的图片，直接不用上传
+			picURLs = append(picURLs,v)
+			continue
+		}
 		if !isFileExist(v) {
 			if cpFile(v) {
 				wg.Add(1)
@@ -56,6 +62,7 @@ func main() {
 
 			}
 		} else {
+			//如果不存在文件，也是 直接就用原路径
 			picURLs = append(picURLs, prePicURL+timePrefix+filepath.Base(v))
 		}
 	}
