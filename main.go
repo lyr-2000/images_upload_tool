@@ -14,7 +14,7 @@ import (
 )
 
 func fPrefix() string {
-	return time.Now().Format("2006_01_02_15__04_05")
+	return time.Now().Format("2006_01_02_15_04_05")
 }
 
 // 图片URL的前缀
@@ -44,9 +44,9 @@ func main() {
 		if v == "" {
 			continue
 		}
-		if strings.Contains(v,"https://")||strings.Contains(v,"http://") {
+		if strings.HasPrefix(v, "https://") || strings.HasPrefix(v, "http://") {
 			//网络上的图片，直接不用上传
-			picURLs = append(picURLs,v)
+			picURLs = append(picURLs, v)
 			continue
 		}
 		if !isFileExist(v) {
