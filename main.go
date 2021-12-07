@@ -21,14 +21,12 @@ func fPrefix() string {
 var prePicURL = "https://cdn.jsdelivr.net/gh/lyr-2000/images_repo_2021_ASUS/"
 
 // git 本地仓库路径
-var picPath = "F:\\STATIC_FILE_XXOO_LIN_YANGRUI_USER_CUSTOM_SYS_FILES_WARNING\\region0\\staticFS\\IMAGES\\2021_7_31\\"
+var picPath = "./repo"
 
 var timePrefix = fPrefix()
 
 func main() {
 	flag.Parse()
-	// \Users\Lenovo\Desktop\piccoding\main.exe "C:\\Users\\Lenovo\\AppData\\Local\\Temp/typora-icon2.png" "C:\\Users\\Lenovo\\AppData\\Local\\Temp/typora-icon.png"
-
 	file := flag.Args()
 	//用于协程异步上传
 	var (
@@ -67,6 +65,8 @@ func main() {
 		}
 	}
 
+	//等上传完再退出
+	wg.Wait()
 	fmt.Println("Upload Success:")
 	//打印数组
 	for _, v := range picURLs {
@@ -75,8 +75,8 @@ func main() {
 		}
 		fmt.Println(v)
 	}
-	//等上传完再退出
-	wg.Wait()
+	// //等上传完再退出
+	// wg.Wait()
 }
 
 func isFileExist(fileName string) bool {
