@@ -21,7 +21,8 @@ func fPrefix() string {
 var prePicURL = "https://cdn.jsdelivr.net/gh/lyr-2000/images_repo_2021_ASUS/"
 
 // git 本地仓库路径
-var picPath = "./repo"
+// var picPath = // git 本地仓库路径
+var picPath = "./image/2021_7_31/"
 
 var timePrefix = fPrefix()
 
